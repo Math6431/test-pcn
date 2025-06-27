@@ -1,82 +1,117 @@
 -----------------------------------------------------------
--- Plugin DCS-BIOS Hub pour écran PCN M-2000C 
+-- Plugin DCS-BIOS Hub pour écran PCN M-2000C - VERSION CORRIGÉE
 -- Compatible avec le nouveau système de SEGMENTS RAZBAM
--- Récupère les données des segments PCN (PCN_UL_SEG, PCN_UR_SEG, etc.)
--- Version: 2.0 - Système de segments
+-- Utilise les bonnes adresses mémoire du module M-2000C officiel
+-- Version: 2.1 - Fix adresses et méthodes
 -----------------------------------------------------------
 
 BIOS.protocol.beginModule("M-2000C", 0x7200)
 BIOS.protocol.setExportModuleAircrafts({"M-2000C"})
 
 local defineString = BIOS.util.defineString
-local defineFloat = BIOS.util.defineFloat
 
 -----------------------------------------------------------
--- FONCTIONS D'AFFICHAGE PCN SEGMENTS (NOUVEAU SYSTÈME RAZBAM)
+-- FONCTIONS PCN SEGMENTS CORRIGÉES
 -----------------------------------------------------------
 
--- Fonction pour récupérer les segments gauches (PCN_UL_SEG0 à PCN_UL_SEG7)
+-- Fonction pour récupérer les segments gauches via list_indication
 local function getPCNLeftSegments()
-    local segments = {}
+    local li = list_indication(9)
+    if not li then return "        " end
     
-    -- Récupère chaque segment individuellement via les arguments DCS
-    for i = 0, 7 do
-        local arg_value = LoGetAircraftDrawArgumentValue(900 + i) -- Arguments segments PCN UL
-        if arg_value and arg_value > 0 then
-            segments[i + 1] = string.char(48 + math.floor(arg_value * 10)) -- Conversion en caractère
-        else
-            segments[i + 1] = " "
+    local segments = {"", "", "", "", "", "", "", ""}
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        -- Recherche des segments PCN_UL_SEG avec index
+        if name and name:match("^PCN_UL_SEG") then
+            local seg_index = tonumber(name:match("PCN_UL_SEG(%d+)"))
+            if seg_index and seg_index >= 0 and seg_index <= 7 then
+                if value and value ~= "" then
+                    segments[seg_index + 1] = tostring(value)
+                end
+            end
         end
     end
     
     return table.concat(segments)
 end
 
--- Fonction pour récupérer les segments droits (PCN_UR_SEG0 à PCN_UR_SEG7)  
+-- Fonction pour récupérer les segments droits via list_indication
 local function getPCNRightSegments()
-    local segments = {}
+    local li = list_indication(9)
+    if not li then return "        " end
     
-    -- Récupère chaque segment individuellement via les arguments DCS
-    for i = 0, 7 do
-        local arg_value = LoGetAircraftDrawArgumentValue(910 + i) -- Arguments segments PCN UR
-        if arg_value and arg_value > 0 then
-            segments[i + 1] = string.char(48 + math.floor(arg_value * 10)) -- Conversion en caractère
-        else
-            segments[i + 1] = " "
+    local segments = {"", "", "", "", "", "", "", ""}
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        -- Recherche des segments PCN_UR_SEG avec index
+        if name and name:match("^PCN_UR_SEG") then
+            local seg_index = tonumber(name:match("PCN_UR_SEG(%d+)"))
+            if seg_index and seg_index >= 0 and seg_index <= 7 then
+                if value and value ~= "" then
+                    segments[seg_index + 1] = tostring(value)
+                end
+            end
         end
     end
     
     return table.concat(segments)
 end
 
--- Fonction pour récupérer les segments PREP (PCN_BL_SEG0 à PCN_BL_SEG6)
+-- Fonction pour récupérer les segments PREP via list_indication
 local function getPCNPrepSegments()
-    local segments = {}
+    local li = list_indication(10)
+    if not li then return "       " end
     
-    -- Récupère chaque segment PREP
-    for i = 0, 6 do
-        local arg_value = LoGetAircraftDrawArgumentValue(920 + i) -- Arguments segments PCN BL (PREP)
-        if arg_value and arg_value > 0 then
-            segments[i + 1] = string.char(48 + math.floor(arg_value * 10))
-        else
-            segments[i + 1] = " "
+    local segments = {"", "", "", "", "", "", ""}
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        -- Recherche des segments PCN_BL_SEG avec index
+        if name and name:match("^PCN_BL_SEG") then
+            local seg_index = tonumber(name:match("PCN_BL_SEG(%d+)"))
+            if seg_index and seg_index >= 0 and seg_index <= 6 then
+                if value and value ~= "" then
+                    segments[seg_index + 1] = tostring(value)
+                end
+            end
         end
     end
     
     return table.concat(segments)
 end
 
--- Fonction pour récupérer les segments DEST (PCN_BR_SEG0 à PCN_BR_SEG6)
+-- Fonction pour récupérer les segments DEST via list_indication
 local function getPCNDestSegments()
-    local segments = {}
+    local li = list_indication(10)
+    if not li then return "       " end
     
-    -- Récupère chaque segment DEST
-    for i = 0, 6 do
-        local arg_value = LoGetAircraftDrawArgumentValue(930 + i) -- Arguments segments PCN BR (DEST)
-        if arg_value and arg_value > 0 then
-            segments[i + 1] = string.char(48 + math.floor(arg_value * 10))
-        else
-            segments[i + 1] = " "
+    local segments = {"", "", "", "", "", "", ""}
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        -- Recherche des segments PCN_BR_SEG avec index
+        if name and name:match("^PCN_BR_SEG") then
+            local seg_index = tonumber(name:match("PCN_BR_SEG(%d+)"))
+            if seg_index and seg_index >= 0 and seg_index <= 6 then
+                if value and value ~= "" then
+                    segments[seg_index + 1] = tostring(value)
+                end
+            end
         end
     end
     
@@ -85,159 +120,133 @@ end
 
 -- Fonction pour les indicateurs gauches (N/S/+/-)
 local function getPCNLeftIndicators()
-    local n_value = LoGetAircraftDrawArgumentValue(901) -- PCN_UL_N
-    local s_value = LoGetAircraftDrawArgumentValue(902) -- PCN_UL_S  
-    local p_value = LoGetAircraftDrawArgumentValue(903) -- PCN_UL_P
-    local m_value = LoGetAircraftDrawArgumentValue(904) -- PCN_UL_M
+    local li = list_indication(9)
+    if not li then return " " end
     
-    local indicators = ""
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    local count = 0
+    local ret = " "
     
-    if n_value and n_value > 0.5 then indicators = indicators .. "N" end
-    if s_value and s_value > 0.5 then indicators = indicators .. "S" end
-    if p_value and p_value > 0.5 then indicators = indicators .. "+" end
-    if m_value and m_value > 0.5 then indicators = indicators .. "-" end
-    
-    if indicators == "" then
-        return " "
-    elseif string.len(indicators) > 1 then
-        return "*" -- Multiple indicateurs actifs
-    else
-        return indicators
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        if name == "PCN_UL_N" then
+            count = count + 1
+            ret = "N"
+        elseif name == "PCN_UL_S" then
+            count = count + 1
+            ret = "S"
+        elseif name == "PCN_UL_P" then
+            count = count + 1
+            ret = "+"
+        elseif name == "PCN_UL_M" then
+            count = count + 1
+            ret = "-"
+        end
     end
+    
+    if count > 1 then ret = "*" end
+    return ret
 end
 
 -- Fonction pour les indicateurs droits (E/W/+/-)
 local function getPCNRightIndicators()
-    local e_value = LoGetAircraftDrawArgumentValue(911) -- PCN_UR_E
-    local w_value = LoGetAircraftDrawArgumentValue(912) -- PCN_UR_W
-    local p_value = LoGetAircraftDrawArgumentValue(913) -- PCN_UR_P
-    local m_value = LoGetAircraftDrawArgumentValue(914) -- PCN_UR_M
+    local li = list_indication(9)
+    if not li then return " " end
     
-    local indicators = ""
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    local count = 0
+    local ret = " "
     
-    if e_value and e_value > 0.5 then indicators = indicators .. "E" end
-    if w_value and w_value > 0.5 then indicators = indicators .. "W" end
-    if p_value and p_value > 0.5 then indicators = indicators .. "+" end
-    if m_value and m_value > 0.5 then indicators = indicators .. "-" end
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        if name == "PCN_UR_E" then
+            count = count + 1
+            ret = "E"
+        elseif name == "PCN_UR_W" or name == "PCN_UR_O" then
+            count = count + 1
+            ret = "W"
+        elseif name == "PCN_UR_P" then
+            count = count + 1
+            ret = "+"
+        elseif name == "PCN_UR_M" then
+            count = count + 1
+            ret = "-"
+        end
+    end
     
-    if indicators == "" then
-        return " "
-    elseif string.len(indicators) > 1 then
-        return "*" -- Multiple indicateurs actifs
+    if count > 1 then ret = "*" end
+    return ret
+end
+
+-----------------------------------------------------------
+-- FONCTIONS DE DEBUG - POUR ANALYSER LES INDICATIONS
+-----------------------------------------------------------
+
+-- Fonction de debug pour lister toutes les indications niveau 9
+local function getPCNDebugList9()
+    local li = list_indication(9)
+    if not li then return "NO_IND_9" end
+    
+    local debug_info = ""
+    local count = 0
+    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
+    
+    while true do
+        local name, value = m()
+        if not name then break end
+        
+        if name and name:match("PCN_") then
+            count = count + 1
+            if count <= 3 then -- Limite pour éviter chaînes trop longues
+                debug_info = debug_info .. name .. ":" .. (value or "nil") .. ";"
+            end
+        end
+    end
+    
+    if debug_info == "" then
+        return "NO_PCN_DATA"
     else
-        return indicators
+        return debug_info:sub(1, 30) -- Limite à 30 caractères
     end
 end
 
------------------------------------------------------------
--- FONCTIONS ALTERNATIVES PAR LIST_INDICATION (AU CAS OÙ)
------------------------------------------------------------
-
--- Fonction alternative utilisant list_indication pour les segments gauches
-local function getPCNLeftSegmentsAlt()
-    local li = list_indication(9)
-    if not li then return "        " end
-    
-    local segments = {"", "", "", "", "", "", "", ""}
-    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-    
-    while true do
-        local name, value = m()
-        if not name then break end
-        
-        -- Recherche des segments UL
-        for i = 0, 7 do
-            if name == "PCN_UL_SEG" .. i then
-                if value and value ~= "" then
-                    segments[i + 1] = tostring(value)
-                end
-            end
-        end
-    end
-    
-    return table.concat(segments)
-end
-
--- Fonction alternative utilisant list_indication pour les segments droits
-local function getPCNRightSegmentsAlt()
-    local li = list_indication(9)
-    if not li then return "        " end
-    
-    local segments = {"", "", "", "", "", "", "", ""}
-    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-    
-    while true do
-        local name, value = m()
-        if not name then break end
-        
-        -- Recherche des segments UR
-        for i = 0, 7 do
-            if name == "PCN_UR_SEG" .. i then
-                if value and value ~= "" then
-                    segments[i + 1] = tostring(value)
-                end
-            end
-        end
-    end
-    
-    return table.concat(segments)
-end
-
--- Fonction alternative pour PREP segments
-local function getPCNPrepSegmentsAlt()
+-- Fonction de debug pour lister toutes les indications niveau 10
+local function getPCNDebugList10()
     local li = list_indication(10)
-    if not li then return "       " end
+    if not li then return "NO_IND_10" end
     
-    local segments = {"", "", "", "", "", "", ""}
+    local debug_info = ""
+    local count = 0
     local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
     
     while true do
         local name, value = m()
         if not name then break end
         
-        -- Recherche des segments BL (PREP)
-        for i = 0, 6 do
-            if name == "PCN_BL_SEG" .. i then
-                if value and value ~= "" then
-                    segments[i + 1] = tostring(value)
-                end
+        if name and name:match("PCN_") then
+            count = count + 1
+            if count <= 3 then
+                debug_info = debug_info .. name .. ":" .. (value or "nil") .. ";"
             end
         end
     end
     
-    return table.concat(segments)
-end
-
--- Fonction alternative pour DEST segments
-local function getPCNDestSegmentsAlt()
-    local li = list_indication(10)
-    if not li then return "       " end
-    
-    local segments = {"", "", "", "", "", "", ""}
-    local m = li:gmatch("-----------------------------------------\n([^\n]+)\n([^\n]*)\n")
-    
-    while true do
-        local name, value = m()
-        if not name then break end
-        
-        -- Recherche des segments BR (DEST)
-        for i = 0, 6 do
-            if name == "PCN_BR_SEG" .. i then
-                if value and value ~= "" then
-                    segments[i + 1] = tostring(value)
-                end
-            end
-        end
+    if debug_info == "" then
+        return "NO_PCN_DATA"
+    else
+        return debug_info:sub(1, 30)
     end
-    
-    return table.concat(segments)
 end
 
 -----------------------------------------------------------
--- DÉFINITIONS DES SORTIES PCN SEGMENTS
+-- DÉFINITIONS DES SORTIES PCN (ADRESSES CORRIGÉES)
 -----------------------------------------------------------
 
--- Méthode principale (Draw Arguments)
+-- Sorties principales PCN segments
 defineString("PCN_SEG_LEFT", getPCNLeftSegments, 8, "PCN SEGMENTS", "PCN Segments Gauche (UL_SEG0-7)")
 defineString("PCN_SEG_RIGHT", getPCNRightSegments, 8, "PCN SEGMENTS", "PCN Segments Droit (UR_SEG0-7)")
 defineString("PCN_SEG_PREP", getPCNPrepSegments, 7, "PCN SEGMENTS", "PCN Segments PREP (BL_SEG0-6)")
@@ -245,17 +254,15 @@ defineString("PCN_SEG_DEST", getPCNDestSegments, 7, "PCN SEGMENTS", "PCN Segment
 defineString("PCN_IND_LEFT", getPCNLeftIndicators, 1, "PCN SEGMENTS", "PCN Indicateurs Gauche (N/S/+/-)")
 defineString("PCN_IND_RIGHT", getPCNRightIndicators, 1, "PCN SEGMENTS", "PCN Indicateurs Droit (E/W/+/-)")
 
--- Méthode alternative (List Indication)  
-defineString("PCN_SEG_LEFT_ALT", getPCNLeftSegmentsAlt, 8, "PCN SEGMENTS ALT", "PCN Segments Gauche (Alternative)")
-defineString("PCN_SEG_RIGHT_ALT", getPCNRightSegmentsAlt, 8, "PCN SEGMENTS ALT", "PCN Segments Droit (Alternative)")
-defineString("PCN_SEG_PREP_ALT", getPCNPrepSegmentsAlt, 7, "PCN SEGMENTS ALT", "PCN Segments PREP (Alternative)")
-defineString("PCN_SEG_DEST_ALT", getPCNDestSegmentsAlt, 7, "PCN SEGMENTS ALT", "PCN Segments DEST (Alternative)")
+-- Sorties de debug
+defineString("PCN_DEBUG_9", getPCNDebugList9, 30, "PCN DEBUG", "PCN Debug Indication 9")
+defineString("PCN_DEBUG_10", getPCNDebugList10, 30, "PCN DEBUG", "PCN Debug Indication 10")
 
 -----------------------------------------------------------
--- SEGMENTS INDIVIDUELS POUR DEBUG/ANALYSE FINE
+-- SEGMENTS INDIVIDUELS POUR ANALYSE DÉTAILLÉE
 -----------------------------------------------------------
 
--- Segments individuels gauches
+-- Segments individuels gauches pour debug
 for i = 0, 7 do
     local function getSegmentUL(seg_num)
         return function()
@@ -278,7 +285,7 @@ for i = 0, 7 do
     defineString("PCN_UL_SEG" .. i, getSegmentUL(i), 6, "PCN DEBUG", "PCN UL Segment " .. i)
 end
 
--- Segments individuels droits
+-- Segments individuels droits pour debug
 for i = 0, 7 do
     local function getSegmentUR(seg_num)
         return function()
