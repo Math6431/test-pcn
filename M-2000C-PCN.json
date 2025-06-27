@@ -1,0 +1,424 @@
+{
+  "PCN SEGMENTS": {
+    "PCN_SEG_LEFT": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Segments Gauche (UL_SEG0-7)",
+      "identifier": "PCN_SEG_LEFT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30000,
+          "description": "PCN Segments Gauche (UL_SEG0-7)",
+          "max_length": 8,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_RIGHT": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Segments Droit (UR_SEG0-7)",
+      "identifier": "PCN_SEG_RIGHT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30008,
+          "description": "PCN Segments Droit (UR_SEG0-7)",
+          "max_length": 8,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_PREP": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Segments PREP (BL_SEG0-6)",
+      "identifier": "PCN_SEG_PREP",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30016,
+          "description": "PCN Segments PREP (BL_SEG0-6)",
+          "max_length": 7,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_DEST": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Segments DEST (BR_SEG0-6)",
+      "identifier": "PCN_SEG_DEST",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30024,
+          "description": "PCN Segments DEST (BR_SEG0-6)",
+          "max_length": 7,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_IND_LEFT": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Indicateurs Gauche (N/S/+/-)",
+      "identifier": "PCN_IND_LEFT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30032,
+          "description": "PCN Indicateurs Gauche (N/S/+/-)",
+          "max_length": 1,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_IND_RIGHT": {
+      "category": "PCN SEGMENTS",
+      "control_type": "display",
+      "description": "PCN Indicateurs Droit (E/W/+/-)",
+      "identifier": "PCN_IND_RIGHT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30034,
+          "description": "PCN Indicateurs Droit (E/W/+/-)",
+          "max_length": 1,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "PCN SEGMENTS ALT": {
+    "PCN_SEG_LEFT_ALT": {
+      "category": "PCN SEGMENTS ALT",
+      "control_type": "display",
+      "description": "PCN Segments Gauche (Alternative)",
+      "identifier": "PCN_SEG_LEFT_ALT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30036,
+          "description": "PCN Segments Gauche (Alternative)",
+          "max_length": 8,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_RIGHT_ALT": {
+      "category": "PCN SEGMENTS ALT",
+      "control_type": "display",
+      "description": "PCN Segments Droit (Alternative)",
+      "identifier": "PCN_SEG_RIGHT_ALT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30044,
+          "description": "PCN Segments Droit (Alternative)",
+          "max_length": 8,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_PREP_ALT": {
+      "category": "PCN SEGMENTS ALT",
+      "control_type": "display",
+      "description": "PCN Segments PREP (Alternative)",
+      "identifier": "PCN_SEG_PREP_ALT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30052,
+          "description": "PCN Segments PREP (Alternative)",
+          "max_length": 7,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_SEG_DEST_ALT": {
+      "category": "PCN SEGMENTS ALT",
+      "control_type": "display",
+      "description": "PCN Segments DEST (Alternative)",
+      "identifier": "PCN_SEG_DEST_ALT",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30060,
+          "description": "PCN Segments DEST (Alternative)",
+          "max_length": 7,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "PCN DEBUG": {
+    "PCN_UL_SEG0": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 0",
+      "identifier": "PCN_UL_SEG0",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30100,
+          "description": "PCN UL Segment 0",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG1": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 1",
+      "identifier": "PCN_UL_SEG1",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30106,
+          "description": "PCN UL Segment 1",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG2": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 2",
+      "identifier": "PCN_UL_SEG2",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30112,
+          "description": "PCN UL Segment 2",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG3": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 3",
+      "identifier": "PCN_UL_SEG3",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30118,
+          "description": "PCN UL Segment 3",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG4": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 4",
+      "identifier": "PCN_UL_SEG4",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30124,
+          "description": "PCN UL Segment 4",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG5": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 5",
+      "identifier": "PCN_UL_SEG5",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30130,
+          "description": "PCN UL Segment 5",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG6": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 6",
+      "identifier": "PCN_UL_SEG6",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30136,
+          "description": "PCN UL Segment 6",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UL_SEG7": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UL Segment 7",
+      "identifier": "PCN_UL_SEG7",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30142,
+          "description": "PCN UL Segment 7",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG0": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 0",
+      "identifier": "PCN_UR_SEG0",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30200,
+          "description": "PCN UR Segment 0",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG1": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 1",
+      "identifier": "PCN_UR_SEG1",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30206,
+          "description": "PCN UR Segment 1",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG2": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 2",
+      "identifier": "PCN_UR_SEG2",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30212,
+          "description": "PCN UR Segment 2",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG3": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 3",
+      "identifier": "PCN_UR_SEG3",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30218,
+          "description": "PCN UR Segment 3",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG4": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 4",
+      "identifier": "PCN_UR_SEG4",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30224,
+          "description": "PCN UR Segment 4",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG5": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 5",
+      "identifier": "PCN_UR_SEG5",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30230,
+          "description": "PCN UR Segment 5",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG6": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 6",
+      "identifier": "PCN_UR_SEG6",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30236,
+          "description": "PCN UR Segment 6",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    },
+    "PCN_UR_SEG7": {
+      "category": "PCN DEBUG",
+      "control_type": "display",
+      "description": "PCN UR Segment 7",
+      "identifier": "PCN_UR_SEG7",
+      "inputs": [],
+      "outputs": [
+        {
+          "address": 30242,
+          "description": "PCN UR Segment 7",
+          "max_length": 6,
+          "suffix": "",
+          "type": "string"
+        }
+      ]
+    }
+  }
+}
